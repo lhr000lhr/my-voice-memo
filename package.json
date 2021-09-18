@@ -12,6 +12,8 @@
     "appcenter-analytics": "4.2.0",
     "appcenter-crashes": "4.2.0",
     "expo": "~42.0.1",
+    "expo-app-loading": "^1.1.2",
+    "expo-av": "~9.2.3",
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
     "expo-updates": "~0.8.1",
@@ -28,6 +30,7 @@
     "@babel/core": "^7.9.0",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
+    "babel-plugin-import": "^1.13.3",
     "git-cz": "^4.7.6",
     "typescript": "~4.0.0"
   },
