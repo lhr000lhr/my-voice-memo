@@ -3,11 +3,10 @@ import { connect } from 'react-redux'
 import { Text } from 'react-native'
 import { ListItem, Button } from 'react-native-elements'
 
-import { createAction } from '../utils'
-
-function VoiceMemoItem({ recording, dispatch }) {
+function VoiceMemoItem({ recording, onPress, onDelete }) {
   return (
     <ListItem.Swipeable
+      onPress={onPress}
       bottomDivider
       rightContent={
         <Button
@@ -15,7 +14,7 @@ function VoiceMemoItem({ recording, dispatch }) {
           icon={{ name: 'delete', color: 'white' }}
           buttonStyle={{ minHeight: '100%', backgroundColor: 'red' }}
           onPress={() => {
-            dispatch(createAction('records/del')({ recording }))
+            onDelete()
           }}
         />
       }

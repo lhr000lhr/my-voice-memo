@@ -5,7 +5,9 @@ import { View, StyleSheet, FlatList } from 'react-native'
 import RecorderPanel from '../components/RecorderPanel'
 import VoiceMemoItem from '../components/VoiceMemoItem'
 
-function Home({ records }) {
+import { createAction } from '../utils'
+
+function Home({ records, dispatch, navigation }) {
   return (
     <View style={styles.container}>
       <FlatList
@@ -13,7 +15,18 @@ function Home({ records }) {
         contentContainerStyle={styles.containerStyle}
         data={records.data}
         keyExtractor={(_, i) => `${i}`}
-        renderItem={({ item, index }) => <VoiceMemoItem key={index} recording={item} />}
+        renderItem={({ item: recording, index }) => (
+          <VoiceMemoItem
+            key={index}
+            recording={recording}
+            onPress={() => {
+              navigation.push('player', { title: '__TITLE__', filepath: recording.uri })
+            }}
+            onDelete={() => {
+              dispatch(createAction('records/del')({ recording }))
+            }}
+          />
+        )}
       />
       <RecorderPanel />
     </View>

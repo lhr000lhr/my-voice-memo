@@ -23,7 +23,7 @@
   "dependencies": {
     "@react-native-voice/voice": "^3.2.1",
     "@react-navigation/native": "^6.0.2",
-    "@react-navigation/native-stack": "^6.1.0",
+    "@react-navigation/stack": "^6.0.7",
     "appcenter": "4.2.0",
     "appcenter-analytics": "4.2.0",
     "appcenter-crashes": "4.2.0",
@@ -44,6 +44,8 @@
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
+    "react-native-sound": "^0.11.1",
+    "react-native-sound-playerview": "git://github.com/lhr000lhr/react-native-sound-playerview.git#e864a7f",
     "react-native-unimodules": "~0.14.5",
     "react-native-web": "~0.13.12",
     "react-redux": "^5.0.7",

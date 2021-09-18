@@ -7,8 +7,6 @@ import { createAction } from '../utils'
 
 function RecorderPanel({ dispatch }) {
   const [recording, setRecording] = React.useState()
-  const [soundUrl, setSoundUrl] = React.useState()
-  const [sound, setSound] = React.useState()
   const [pause, setPause] = React.useState(false)
 
   async function startRecording() {
@@ -33,7 +31,6 @@ function RecorderPanel({ dispatch }) {
     setRecording(undefined)
     await recording.stopAndUnloadAsync()
     const uri = recording.getURI()
-    setSoundUrl(uri)
 
     dispatch(createAction('records/add')({ recording: { uri } }))
     console.log('Recording stopped and stored at', uri)
@@ -51,26 +48,6 @@ function RecorderPanel({ dispatch }) {
     setPause(false)
   }
 
-  async function playSound() {
-    console.log('Loading Sound')
-    const player = await Audio.Sound.createAsync({ uri: soundUrl })
-    setSound(player.sound)
-
-    console.log('Playing Sound')
-    await player.sound.playAsync()
-  }
-
-  React.useEffect(
-    () =>
-      sound
-        ? () => {
-            console.log('Unloading Sound')
-            sound.unloadAsync()
-          }
-        : undefined,
-    [sound]
-  )
-
   return (
     <View style={styles.container}>
       <Button
@@ -81,20 +58,13 @@ function RecorderPanel({ dispatch }) {
         title={pause ? 'Pause' : 'resume'}
         onPress={pause ? resumeRecording : pauseRecording}
       />
-
-      <Button
-        title="Play Sound"
-        onPress={() => {
-          playSound()
-        }}
-      />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
     height: 200,
     width: '100%',
   },
