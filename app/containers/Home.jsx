@@ -1,18 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { View, StyleSheet, FlatList } from 'react-native'
 
 import RecorderPanel from '../components/RecorderPanel'
 import VoiceMemoItem from '../components/VoiceMemoItem'
 
-export default function Home() {
+function Home({ records }) {
   return (
     <View style={styles.container}>
       <FlatList
         style={styles.listStyle}
         contentContainerStyle={styles.containerStyle}
-        data={[1, 1, 1]}
+        data={records.data}
         keyExtractor={(_, i) => `${i}`}
-        renderItem={({ index }) => <VoiceMemoItem key={index} />}
+        renderItem={({ item, index }) => <VoiceMemoItem key={index} recording={item} />}
       />
       <RecorderPanel />
     </View>
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   listStyle: {
     width: '100%',
   },
-  containerStyle: {
-    backgroundColor: 'red',
-  },
+  containerStyle: {},
 })
+
+export default connect(({ records }) => ({ records }))(Home)

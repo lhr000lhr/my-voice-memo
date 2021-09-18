@@ -1,8 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { StyleSheet, Button, View } from 'react-native'
 import { Audio } from 'expo-av'
 
-export default function RecorderPanel() {
+import { createAction } from '../utils'
+
+function RecorderPanel({ dispatch }) {
   const [recording, setRecording] = React.useState()
   const [soundUrl, setSoundUrl] = React.useState()
   const [sound, setSound] = React.useState()
@@ -30,8 +33,11 @@ export default function RecorderPanel() {
     await recording.stopAndUnloadAsync()
     const uri = recording.getURI()
     setSoundUrl(uri)
+
+    dispatch(createAction('records/add')({ recording: { uri } }))
     console.log('Recording stopped and stored at', uri)
   }
+
   async function playSound() {
     console.log('Loading Sound')
     const player = await Audio.Sound.createAsync({ uri: soundUrl })
@@ -75,3 +81,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 })
+
+export default connect()(RecorderPanel)

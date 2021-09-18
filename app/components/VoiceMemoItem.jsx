@@ -1,19 +1,30 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+import { Text } from 'react-native'
+import { ListItem, Button } from 'react-native-elements'
 
-export default function VoiceMemoItem() {
+import { createAction } from '../utils'
+
+function VoiceMemoItem({ recording, dispatch }) {
   return (
-    <View style={styles.container}>
-      <Text>123</Text>
-    </View>
+    <ListItem.Swipeable
+      bottomDivider
+      rightContent={
+        <Button
+          title="Delete"
+          icon={{ name: 'delete', color: 'white' }}
+          buttonStyle={{ minHeight: '100%', backgroundColor: 'red' }}
+          onPress={() => {
+            dispatch(createAction('records/del')({ recording }))
+          }}
+        />
+      }
+    >
+      <ListItem.Content>
+        <Text>{recording?.uri}</Text>
+      </ListItem.Content>
+    </ListItem.Swipeable>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
+export default connect()(VoiceMemoItem)
