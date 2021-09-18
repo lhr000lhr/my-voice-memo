@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Button, View } from 'react-native'
+import { StyleSheet, Button } from 'react-native'
 import { Audio } from 'expo-av'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { createAction } from '../utils'
 
@@ -49,7 +50,7 @@ function RecorderPanel({ dispatch }) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['bottom']}>
       <Button
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording}
@@ -60,14 +61,13 @@ function RecorderPanel({ dispatch }) {
           onPress={pause ? resumeRecording : pauseRecording}
         />
       )}
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'gray',
-    height: 200,
     width: '100%',
   },
 })
