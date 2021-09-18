@@ -9,6 +9,7 @@ function RecorderPanel({ dispatch }) {
   const [recording, setRecording] = React.useState()
   const [soundUrl, setSoundUrl] = React.useState()
   const [sound, setSound] = React.useState()
+  const [pause, setPause] = React.useState(false)
 
   async function startRecording() {
     try {
@@ -38,6 +39,18 @@ function RecorderPanel({ dispatch }) {
     console.log('Recording stopped and stored at', uri)
   }
 
+  async function pauseRecording() {
+    console.log('Pausing recording..')
+    await recording.pauseAsync()
+    setPause(true)
+  }
+
+  async function resumeRecording() {
+    console.log('Pausing recording..')
+    await recording.startAsync()
+    setPause(false)
+  }
+
   async function playSound() {
     console.log('Loading Sound')
     const player = await Audio.Sound.createAsync({ uri: soundUrl })
@@ -64,6 +77,11 @@ function RecorderPanel({ dispatch }) {
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording}
       />
+      <Button
+        title={pause ? 'Pause' : 'resume'}
+        onPress={pause ? resumeRecording : pauseRecording}
+      />
+
       <Button
         title="Play Sound"
         onPress={() => {
