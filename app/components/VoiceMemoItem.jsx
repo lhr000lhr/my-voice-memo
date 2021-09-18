@@ -1,28 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Text } from 'react-native'
-import { ListItem, Button } from 'react-native-elements'
+import { ListItem } from 'react-native-elements'
 
-function VoiceMemoItem({ recording, onPress, onDelete }) {
+function VoiceMemoItem({ recording, onPress }) {
   return (
-    <ListItem.Swipeable
-      onPress={onPress}
-      bottomDivider
-      rightContent={
-        <Button
-          title="Delete"
-          icon={{ name: 'delete', color: 'white' }}
-          buttonStyle={{ minHeight: '100%', backgroundColor: 'red' }}
-          onPress={() => {
-            onDelete()
-          }}
-        />
-      }
-    >
+    <ListItem onPress={onPress} bottomDivider>
       <ListItem.Content>
         <Text>{recording?.uri}</Text>
       </ListItem.Content>
-    </ListItem.Swipeable>
+    </ListItem>
   )
 }
 

@@ -9,7 +9,7 @@ export default {
     add(state, { payload }) {
       const { recording } = payload
       const { data } = state
-      data.push(recording)
+      data.unshift(recording)
       return { ...state, data }
     },
     del(state, { payload }) {

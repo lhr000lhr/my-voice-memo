@@ -46,6 +46,7 @@
     "react-native-screens": "~3.4.0",
     "react-native-sound": "^0.11.1",
     "react-native-sound-playerview": "git://github.com/lhr000lhr/react-native-sound-playerview.git#e864a7f",
+    "react-native-swipe-list-view": "^3.2.9",
     "react-native-unimodules": "~0.14.5",
     "react-native-web": "~0.13.12",
     "react-redux": "^5.0.7",
