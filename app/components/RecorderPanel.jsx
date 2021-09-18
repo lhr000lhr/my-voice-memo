@@ -54,10 +54,12 @@ function RecorderPanel({ dispatch }) {
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording}
       />
-      <Button
-        title={pause ? 'Pause' : 'resume'}
-        onPress={pause ? resumeRecording : pauseRecording}
-      />
+      {recording && (
+        <Button
+          title={pause ? 'resume' : 'Pause'}
+          onPress={pause ? resumeRecording : pauseRecording}
+        />
+      )}
     </View>
   )
 }
