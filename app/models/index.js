@@ -1,5 +1,5 @@
-import appModel from './app'
+import records from './records'
 
 export const registerModels = app => {
-  app.model(appModel)
+  app.model(records)
 }

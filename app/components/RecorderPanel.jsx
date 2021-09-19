@@ -1,11 +1,14 @@
 import React from 'react'
-import { StyleSheet, Button, View } from 'react-native'
+import { connect } from 'react-redux'
+import { StyleSheet, Button } from 'react-native'
 import { Audio } from 'expo-av'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-export default function RecorderPanel() {
+import { createAction } from '../utils'
+
+function RecorderPanel({ dispatch }) {
   const [recording, setRecording] = React.useState()
-  const [soundUrl, setSoundUrl] = React.useState()
-  const [sound, setSound] = React.useState()
+  const [pause, setPause] = React.useState(false)
 
   async function startRecording() {
     try {
@@ -29,49 +32,44 @@ export default function RecorderPanel() {
     setRecording(undefined)
     await recording.stopAndUnloadAsync()
     const uri = recording.getURI()
-    setSoundUrl(uri)
+
+    dispatch(createAction('records/add')({ recording: { uri } }))
     console.log('Recording stopped and stored at', uri)
   }
-  async function playSound() {
-    console.log('Loading Sound')
-    const player = await Audio.Sound.createAsync({ uri: soundUrl })
-    setSound(player.sound)
 
-    console.log('Playing Sound')
-    await player.sound.playAsync()
+  async function pauseRecording() {
+    console.log('Pausing recording..')
+    await recording.pauseAsync()
+    setPause(true)
   }
 
-  React.useEffect(
-    () =>
-      sound
-        ? () => {
-            console.log('Unloading Sound')
-            sound.unloadAsync()
-          }
-        : undefined,
-    [sound]
-  )
+  async function resumeRecording() {
+    console.log('Pausing recording..')
+    await recording.startAsync()
+    setPause(false)
+  }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['bottom']}>
       <Button
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording}
       />
-      <Button
-        title="Play Sound"
-        onPress={() => {
-          playSound()
-        }}
-      />
-    </View>
+      {recording && (
+        <Button
+          title={pause ? 'resume' : 'Pause'}
+          onPress={pause ? resumeRecording : pauseRecording}
+        />
+      )}
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
-    height: 200,
+    backgroundColor: 'gray',
     width: '100%',
   },
 })
+
+export default connect()(RecorderPanel)

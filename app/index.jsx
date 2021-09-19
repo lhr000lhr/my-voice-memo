@@ -21,7 +21,7 @@ registerModels(app)
 const App = app.start(<Router />)
 persistStore(app.getStore(), {
   storage: AsyncStorage,
-  blacklist: ['router'],
+  blacklist: [],
 })
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
