@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import Moment from 'moment'
 
 export default {
   namespace: 'records',
@@ -8,8 +9,16 @@ export default {
   reducers: {
     add(state, { payload }) {
       const { recording } = payload
+      const { uri } = recording
+
       const { data } = state
-      data.unshift(recording)
+      data.unshift({
+        uri,
+        name: `New Recording ${data.length + 1}`,
+        createdAt: Moment()
+          .toDate()
+          .getTime(),
+      })
       return { ...state, data }
     },
     del(state, { payload }) {
