@@ -110,7 +110,7 @@ exports[`VoiceMemoItem renders correctly with VoiceMemoItem 1`] = `
         }
         testID="listItemTitle"
       >
-        Today at 8:43 PM
+        01/01/2020
       </Text>
     </View>
     <View
