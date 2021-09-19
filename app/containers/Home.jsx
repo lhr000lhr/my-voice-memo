@@ -14,19 +14,13 @@ function Home({ records, dispatch, navigation }) {
     <View style={styles.container}>
       <SwipeListView
         style={styles.listStyle}
-        contentContainerStyle={styles.containerStyle}
         data={records.data}
         keyExtractor={(_, i) => `${i}`}
         renderHiddenItem={({ item: recording, index }, rowMap) => (
           <Button
             title="Delete"
             icon={{ name: 'delete', color: 'white' }}
-            buttonStyle={{
-              height: '100%',
-              width: 100,
-              alignSelf: 'flex-end',
-              backgroundColor: 'red',
-            }}
+            buttonStyle={styles.buttonStyle}
             onPress={() => {
               rowMap[index].closeRow()
               dispatch(createAction('records/del')({ recording }))
@@ -40,7 +34,7 @@ function Home({ records, dispatch, navigation }) {
             key={index}
             recording={recording}
             onPress={() => {
-              navigation.push('player', { title: '__TITLE__', filepath: recording.uri })
+              navigation.push('player', { filepath: recording.uri })
             }}
           />
         )}
@@ -60,7 +54,12 @@ const styles = StyleSheet.create({
   listStyle: {
     width: '100%',
   },
-  containerStyle: {},
+  buttonStyle: {
+    height: '100%',
+    width: 100,
+    alignSelf: 'flex-end',
+    backgroundColor: 'red',
+  },
 })
 
 export default connect(({ records }) => ({ records }))(Home)
