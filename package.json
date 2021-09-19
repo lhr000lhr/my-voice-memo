@@ -6,7 +6,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "lint-staged": "lint-staged",
-    "lint-staged:js": "eslint --ext .js"
+    "lint-staged:js": "eslint --ext .js",
+    "test": "jest"
   },
   "husky": {
     "hooks": {
@@ -70,6 +71,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.1",
     "eslint-plugin-react": "^7.9.1",
+    "react-test-renderer": "16.11.0",
     "husky": "^3.0.1",
     "jest": "^24.8.0",
     "lint-staged": "^8.1.1",
@@ -78,7 +80,10 @@
     "typescript": "~4.0.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "private": true,
   "name": "my-voice-memo",
