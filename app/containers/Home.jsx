@@ -33,6 +33,9 @@ function Home({ records, dispatch, navigation }) {
           <VoiceMemoItem
             key={index}
             recording={recording}
+            onPressConvertToText={() => {
+              navigation.push('TextPreview', { recording })
+            }}
             onPress={() => {
               navigation.push('player', { filepath: recording.uri })
             }}

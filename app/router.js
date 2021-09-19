@@ -6,6 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import PlayerScreen from 'react-native-sound-playerview'
 
 import Home from './containers/Home'
+import TextPreview from './containers/TextPreview'
 
 const Stack = createStackNavigator()
 
@@ -19,6 +20,7 @@ export default function App() {
           })}
         >
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="TextPreview" component={TextPreview} />
           <Stack.Screen name="player" component={PlayerScreen} />
         </Stack.Navigator>
       </NavigationContainer>
