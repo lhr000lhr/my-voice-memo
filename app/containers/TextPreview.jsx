@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ActivityIndicator } from 'react-native'
 import { Text } from 'react-native-elements'
 import { createAction } from '../utils'
 
-function TextPreview({ dispatch, route }) {
-  const { recording } = route.params
+function TextPreview({ dispatch, route, textPreview }) {
   useEffect(() => {
-    dispatch(createAction('records/queryText')({ recording }))
+    dispatch(createAction('textPreview/queryText')({ recording: route.params.recording }))
   }, [])
 
+  const { loading, recording } = textPreview
   return (
     <View style={styles.container}>
-      <Text>{recording.content.DisplayText}</Text>
+      <ActivityIndicator animating={loading} />
+      <Text>{recording?.content?.DisplayText}</Text>
     </View>
   )
 }
@@ -35,4 +36,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(({ records }) => ({ records }))(TextPreview)
+export default connect(({ textPreview }) => ({ textPreview }))(TextPreview)

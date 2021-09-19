@@ -9,7 +9,16 @@ function VoiceMemoItem({ recording, onPress, onPressConvertToText }) {
         <ListItem.Title>{recording?.name}</ListItem.Title>
         <ListItem.Subtitle>{Moment(recording?.createdAt).calendar()}</ListItem.Subtitle>
       </ListItem.Content>
-      <Button title="convert to text" onPress={onPressConvertToText} />
+      {recording?.content?.RecognitionStatus === 'Success' ? (
+        <Button
+          title="preview content"
+          onPress={onPressConvertToText}
+          buttonStyle={{ backgroundColor: 'green' }}
+        />
+      ) : (
+        <Button title="convert to text" onPress={onPressConvertToText} />
+      )}
+
       <ListItem.Chevron />
     </ListItem>
   )
