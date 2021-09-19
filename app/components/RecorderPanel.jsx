@@ -22,7 +22,7 @@ function RecorderPanel({ dispatch }) {
       const recordingOptions = {
         // android not currently in use, but parameters are required
         android: {
-          extension: '.m4a',
+          extension: '.ogg',
           outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
           audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
           sampleRate: 44100,

@@ -12,8 +12,11 @@ function TextPreview({ dispatch, route, textPreview }) {
   const { loading, recording } = textPreview
   return (
     <View style={styles.container}>
-      <ActivityIndicator animating={loading} />
-      <Text>{recording?.content?.DisplayText}</Text>
+      {loading ? (
+        <ActivityIndicator animating={loading} />
+      ) : (
+        <Text>{recording?.content?.DisplayText}</Text>
+      )}
     </View>
   )
 }

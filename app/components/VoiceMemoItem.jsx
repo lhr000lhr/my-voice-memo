@@ -2,7 +2,7 @@ import React from 'react'
 import { ListItem, Button } from 'react-native-elements'
 import Moment from 'moment'
 
-function VoiceMemoItem({ recording, onPress, onPressConvertToText }) {
+function VoiceMemoItem({ recording, onPress, onPressConvertToText, loading }) {
   return (
     <ListItem onPress={onPress} bottomDivider>
       <ListItem.Content>
@@ -16,7 +16,7 @@ function VoiceMemoItem({ recording, onPress, onPressConvertToText }) {
           buttonStyle={{ backgroundColor: 'green' }}
         />
       ) : (
-        <Button title="convert to text" onPress={onPressConvertToText} />
+        <Button title="convert to text" onPress={onPressConvertToText} loading={loading} />
       )}
 
       <ListItem.Chevron />

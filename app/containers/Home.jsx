@@ -9,7 +9,7 @@ import VoiceMemoItem from '../components/VoiceMemoItem'
 
 import { createAction } from '../utils'
 
-function Home({ records, dispatch, navigation }) {
+function Home({ records, dispatch, navigation, textPreview }) {
   return (
     <View style={styles.container}>
       <SwipeListView
@@ -32,6 +32,7 @@ function Home({ records, dispatch, navigation }) {
         renderItem={({ item: recording, index }) => (
           <VoiceMemoItem
             key={index}
+            loading={recording.uri === textPreview.recording.uri && textPreview.loading}
             recording={recording}
             onPressConvertToText={() => {
               navigation.push('TextPreview', { recording })
@@ -65,4 +66,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(({ records }) => ({ records }))(Home)
+export default connect(({ records, textPreview }) => ({ records, textPreview }))(Home)

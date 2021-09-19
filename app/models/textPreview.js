@@ -11,8 +11,9 @@ export default {
     loading: false,
   },
   reducers: {
-    loadingStart(state) {
-      return { ...state, loading: true }
+    loadingStart(state, { payload }) {
+      const { recording } = payload
+      return { ...state, recording, loading: true }
     },
     loadingEnd(state) {
       return { ...state, loading: false }
@@ -31,7 +32,7 @@ export default {
         return
       }
 
-      yield put(createAction('loadingStart')())
+      yield put(createAction('loadingStart')({ recording }))
 
       const options = {
         headers: {
