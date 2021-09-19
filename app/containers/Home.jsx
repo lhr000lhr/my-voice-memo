@@ -32,7 +32,7 @@ function Home({ records, dispatch, navigation, textPreview }) {
         renderItem={({ item: recording, index }) => (
           <VoiceMemoItem
             key={index}
-            loading={recording.uri === textPreview.recording.uri && textPreview.loading}
+            loading={recording?.uri === textPreview?.recording?.uri && textPreview.loading}
             recording={recording}
             onPressConvertToText={() => {
               navigation.push('TextPreview', { recording })
